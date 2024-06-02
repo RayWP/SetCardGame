@@ -3,11 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.GamePlayFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello" />
+    <com.r76127011.setcardgame.CustomView.PlayingCard
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:number="10"
+        app:type="diamond"
+        app:shading="striped"
+        />
 
 </FrameLayout>
