@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.r76127011.setcardgame"
-        minSdk = 25
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
