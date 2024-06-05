@@ -69,7 +69,6 @@ class PlayingCard: View {
         val paint = Paint(Paint.SUBPIXEL_TEXT_FLAG)
         paint.color = -0xff0100 // Set the color to green
         paint.strokeWidth = 20f
-        setBackgroundColor(R.color.black)
 
         if(shading == "solid") {
             paint.style = Paint.Style.FILL_AND_STROKE
