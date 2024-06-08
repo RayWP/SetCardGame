@@ -7,6 +7,7 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.graphics.withClip
 import com.r76127011.setcardgame.R
 
 
@@ -72,21 +73,27 @@ class PlayingCard : View {
     private fun drawCard(canvas: Canvas) {
         val paint = Paint(Paint.SUBPIXEL_TEXT_FLAG)
         paint.color = -0xff0100 // Set the color to green
-        paint.strokeWidth = 20f
-
-        if (shading == "solid") {
-            paint.style = Paint.Style.FILL_AND_STROKE
-        } else if (shading == "open") {
-            paint.style = Paint.Style.STROKE
-        } else {
-
-        }
+        paint.strokeWidth = 10f
 
         val width = width // get views width
         val height = height // get views height
         val shapeWidth = (width * 0.7)
         val shapeHeight = (height * 0.2)
 
+        val strippingPath = Path()
+        if (shading == "solid") {
+            paint.style = Paint.Style.FILL_AND_STROKE
+        } else if (shading == "open") {
+            paint.style = Paint.Style.STROKE
+        } else {
+            paint.style = Paint.Style.STROKE
+            for (i in 0 until width) {
+                if (i % 30 == 0) {
+                    strippingPath.moveTo(i.toFloat(), 0f)
+                    strippingPath.lineTo(i.toFloat(), height.toFloat())
+                }
+            }
+        }
 
         if (type == "oval") {
 
@@ -95,14 +102,18 @@ class PlayingCard : View {
             val totalSpacing = height - totalOvalHeight
             val spacing = totalSpacing / (number + 1)
 
+            val path = Path()
             for (i in 0 until number) {
                 val left = ((width - shapeWidth) / 2).toFloat()
                 val top = (spacing * (i + 1) + shapeHeight * i).toFloat()
                 val right = left + shapeWidth
                 val bottom = top + shapeHeight
                 val oval = RectF(left, top, right.toFloat(), bottom.toFloat())
-                canvas.drawOval(oval, paint)
+                path.addOval(oval, Path.Direction.CW)
             }
+            canvas.drawPath(path, paint) // draw all the shape path
+            canvas.clipPath(path) // cut everything outside the path (diamond shape)
+            canvas.drawPath(strippingPath, paint) // draw the stripping
 
         } else if (type == "diamond") {
             // Calculate spacing for the diamonds
@@ -111,23 +122,22 @@ class PlayingCard : View {
             val spacing: Float = totalSpacing / (number + 1)
 
 
-            var lastPath = Path()
+            var path = Path()
             for (i in 0 until number) {
                 val centerX = (width / 2).toFloat()
                 val centerY: Float =
                     (spacing * (i + 1) + shapeHeight * i + shapeHeight / 2).toFloat()
 
-                // Create a path for the diamond shape
-                val path = Path()
-
                 path.moveTo(centerX, (centerY - shapeHeight / 2).toFloat()) // Top point
                 path.lineTo((centerX - shapeWidth / 2).toFloat(), centerY) // Left point
                 path.lineTo(centerX, (centerY + shapeHeight / 2).toFloat()) // Bottom point
                 path.lineTo((centerX + shapeWidth / 2).toFloat(), centerY) // Right point
-                path.lineTo(centerX, (centerY - shapeHeight / 2).toFloat()) // Right point
-                canvas.drawPath(path, paint)
-            }
+                path.close() // close the path
 
+            }
+            canvas.drawPath(path, paint) // draw all the shape path
+            canvas.clipPath(path) // cut everything outside the path (diamond shape)
+            canvas.drawPath(strippingPath, paint) // draw the stripping
         } else if (type == "squiggle") {
             val left: Float = ((width - shapeWidth) / 2).toFloat()
             val top: Float = ((height - shapeHeight * number) / 2).toFloat()

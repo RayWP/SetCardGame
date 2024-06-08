@@ -9,8 +9,8 @@
     <com.r76127011.setcardgame.CustomView.PlayingCard
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:number="1"
-        app:type="squiggle"
-        app:shading="open"
+        app:number="2"
+        app:type="oval"
+        app:shading="stripped"
         />
 </FrameLayout>
