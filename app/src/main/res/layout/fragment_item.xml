@@ -7,7 +7,7 @@
     <com.r76127011.setcardgame.CustomView.PlayingCard
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        custom:number="3"
-        custom:shading="solid"
-        custom:type="diamond" />
+        custom:number="2"
+        custom:shading="open"
+        custom:type="squiggle" />
 </FrameLayout>

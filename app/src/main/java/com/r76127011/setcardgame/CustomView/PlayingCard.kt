@@ -7,11 +7,10 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.graphics.minus
 import com.r76127011.setcardgame.R
 
 
-class PlayingCard: View {
+class PlayingCard : View {
 
     var number: Int = 0
         set(value) {
@@ -45,7 +44,12 @@ class PlayingCard: View {
         shading = typedArray.getString(R.styleable.PlayingCard_shading) ?: "solid"
         typedArray.recycle()
     }
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
@@ -70,10 +74,12 @@ class PlayingCard: View {
         paint.color = -0xff0100 // Set the color to green
         paint.strokeWidth = 20f
 
-        if(shading == "solid") {
+        if (shading == "solid") {
             paint.style = Paint.Style.FILL_AND_STROKE
-        } else {
+        } else if (shading == "open") {
             paint.style = Paint.Style.STROKE
+        } else {
+
         }
 
         val width = width // get views width
@@ -82,7 +88,7 @@ class PlayingCard: View {
         val shapeHeight = (height * 0.2)
 
 
-        if(type == "oval") {
+        if (type == "oval") {
 
             // Calculate spacing for the ovals
             val totalOvalHeight = shapeHeight * number
@@ -98,7 +104,7 @@ class PlayingCard: View {
                 canvas.drawOval(oval, paint)
             }
 
-        } else if(type == "diamond") {
+        } else if (type == "diamond") {
             // Calculate spacing for the diamonds
             val totalDiamondHeight: Float = (shapeHeight * number).toFloat()
             val totalSpacing = height - totalDiamondHeight
@@ -108,7 +114,8 @@ class PlayingCard: View {
             var lastPath = Path()
             for (i in 0 until number) {
                 val centerX = (width / 2).toFloat()
-                val centerY: Float = (spacing * (i + 1) + shapeHeight * i + shapeHeight / 2).toFloat()
+                val centerY: Float =
+                    (spacing * (i + 1) + shapeHeight * i + shapeHeight / 2).toFloat()
 
                 // Create a path for the diamond shape
                 val path = Path()
@@ -122,9 +129,26 @@ class PlayingCard: View {
             }
 
         } else if (type == "squiggle") {
+            val left: Float = ((width - shapeWidth) / 2).toFloat()
+            val top: Float = ((height - shapeHeight * number) / 2).toFloat()
 
+            // draw squiggle for set card game
+            val path = Path()
+            path.moveTo(100f, 100f); // Starting point
+
+            // Add quadratic Bezier curve
+            path.quadTo(150f, 50f, 200f, 100f);
+
+            // Move to a new starting point
+            path.moveTo(100f, 200f);
+
+            // Add cubic Bezier curve
+            path.cubicTo(150f, 150f, 250f, 250f, 300f, 200f);
+
+            canvas.drawPath(path, paint)
         }
 
     }
+
 
 }
