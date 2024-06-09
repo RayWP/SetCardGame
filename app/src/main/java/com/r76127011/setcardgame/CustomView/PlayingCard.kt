@@ -2,6 +2,7 @@ package com.r76127011.setcardgame.CustomView
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
@@ -21,7 +22,7 @@ class PlayingCard : View {
             }
         }
 
-    var type: String = ""
+    var shape: String = ""
         set(value) {
             if (value in listOf("diamond", "squiggle", "oval")) {
                 field = value
@@ -37,12 +38,30 @@ class PlayingCard : View {
             }
         }
 
+    var color: String = ""
+        set(value) {
+            if (value in listOf("red", "green", "black")) {
+                if (value == "red") {
+                    internalColor = Color.RED
+                } else if (value == "green") {
+                    internalColor = Color.GREEN
+                } else {
+                    internalColor = Color.BLACK
+                }
+                field = value
+                invalidate()
+            }
+        }
+
+    private var internalColor: Int = Color.CYAN
+
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PlayingCard)
         number = typedArray.getInt(R.styleable.PlayingCard_number, 1)
-        type = typedArray.getString(R.styleable.PlayingCard_type) ?: "diamond"
+        shape = typedArray.getString(R.styleable.PlayingCard_shape) ?: "diamond"
         shading = typedArray.getString(R.styleable.PlayingCard_shading) ?: "solid"
+        color = typedArray.getString(R.styleable.PlayingCard_colorLine) ?: "red"
         typedArray.recycle()
     }
 
@@ -59,20 +78,10 @@ class PlayingCard : View {
         }
     }
 
-    private fun drawStroke(canvas: Canvas, shape: RectF) {
-        val numberOfStrokes = 20;
-        // Initialize the hatch paint
-        // Initialize the hatch paint
-        val hatchPaint = Paint()
-        hatchPaint.setColor(-0x1000000) // Black color
-        hatchPaint.strokeWidth = 2f
-
-
-    }
 
     private fun drawCard(canvas: Canvas) {
         val paint = Paint(Paint.SUBPIXEL_TEXT_FLAG)
-        paint.color = -0xff0100 // Set the color to green
+        paint.color = internalColor // Set the color to green
         paint.strokeWidth = 10f
 
         val width = width // get views width
@@ -95,7 +104,7 @@ class PlayingCard : View {
             }
         }
 
-        if (type == "oval") {
+        if (shape == "oval") {
 
             // Calculate spacing for the ovals
             val totalOvalHeight = shapeHeight * number
@@ -115,7 +124,7 @@ class PlayingCard : View {
             canvas.clipPath(path) // cut everything outside the path (diamond shape)
             canvas.drawPath(strippingPath, paint) // draw the stripping
 
-        } else if (type == "diamond") {
+        } else if (shape == "diamond") {
             // Calculate spacing for the diamonds
             val totalDiamondHeight: Float = (shapeHeight * number).toFloat()
             val totalSpacing = height - totalDiamondHeight
@@ -138,7 +147,7 @@ class PlayingCard : View {
             canvas.drawPath(path, paint) // draw all the shape path
             canvas.clipPath(path) // cut everything outside the path (diamond shape)
             canvas.drawPath(strippingPath, paint) // draw the stripping
-        } else if (type == "squiggle") {
+        } else if (shape == "squiggle") {
             val left: Float = ((width - shapeWidth) / 2).toFloat()
             val top: Float = ((height - shapeHeight * number) / 2).toFloat()
 

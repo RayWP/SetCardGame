@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         custom:number="2"
-        custom:shading="open"
-        custom:type="squiggle" />
+        custom:shading="stripped"
+        custom:shape="diamond"
+        custom:colorLine="green"/>
 </FrameLayout>
