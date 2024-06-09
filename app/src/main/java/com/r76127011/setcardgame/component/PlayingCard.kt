@@ -86,7 +86,7 @@ class PlayingCard : View {
             desiredHeight = (parentHeight * 1).toInt()
         } else {
             desiredWidth = (parentWidth * 1).toInt()
-            desiredHeight = (parentHeight * 0.3).toInt()
+            desiredHeight = (parentHeight * 0.28).toInt()
         }
 
         // Use the desired width with the original height spec
@@ -108,7 +108,7 @@ class PlayingCard : View {
     private fun drawCard(canvas: Canvas) {
         val paint = Paint(Paint.SUBPIXEL_TEXT_FLAG)
         paint.color = internalColor // Set the color to green
-        paint.strokeWidth = 10f
+        paint.strokeWidth = 5f
 
         val width = width // get views width
         val height = height // get views height
