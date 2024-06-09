@@ -5,22 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.r76127011.setcardgame.R
+import com.r76127011.setcardgame.RVAdapter.GamePlayRecyclerViewAdapter
 import com.r76127011.setcardgame.ViewModel.GameViewModel
+import com.r76127011.setcardgame.databinding.FragmentGamePlayBinding
 
 class GamePlayFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = GamePlayFragment()
-    }
+    private val viewModel: GameViewModel by activityViewModels()
 
-    private lateinit var viewModel: GameViewModel
-
+    private lateinit var gamePlayAdapter: GamePlayRecyclerViewAdapter
+    private lateinit var binding: FragmentGamePlayBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_game_play, container, false)
+        binding = FragmentGamePlayBinding.inflate(inflater, container, false)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
+        binding.recyclerView.adapter = GamePlayRecyclerViewAdapter(viewModel.deck.value!!)
+        return binding.root
     }
 
 }

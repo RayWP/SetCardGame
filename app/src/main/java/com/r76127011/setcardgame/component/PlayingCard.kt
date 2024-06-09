@@ -1,4 +1,4 @@
-package com.r76127011.setcardgame.CustomView
+package com.r76127011.setcardgame.component
 
 import android.content.Context
 import android.graphics.Canvas
@@ -8,7 +8,6 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
-import androidx.core.graphics.withClip
 import com.r76127011.setcardgame.R
 
 
@@ -70,6 +69,26 @@ class PlayingCard : View {
         attrs,
         defStyleAttr
     )
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        // Get the parent's width
+        val parentWidth = MeasureSpec.getSize(widthMeasureSpec)
+        val parentHeight = MeasureSpec.getSize(heightMeasureSpec)
+
+        // Calculate the desired width (30% of the parent's width)
+        val desiredWidth = (parentWidth * 0.3).toInt()
+        val desiredHeight = (parentHeight * 0.3).toInt()
+
+        // Use the desired width with the original height spec
+        val widthSpec = MeasureSpec.makeMeasureSpec(desiredWidth, MeasureSpec.EXACTLY)
+        val heightSpec = MeasureSpec.makeMeasureSpec(desiredHeight, MeasureSpec.EXACTLY)
+
+        // Call the super method with the new width spec
+        super.onMeasure(widthSpec, heightSpec)
+
+        // Set the measured dimensions
+        setMeasuredDimension(desiredWidth, desiredHeight)
+    }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)

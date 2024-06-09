@@ -8,9 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.databinding.DataBindingUtil
+import com.r76127011.setcardgame.ViewModel.GameViewModel
 import com.r76127011.setcardgame.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel = GameViewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)

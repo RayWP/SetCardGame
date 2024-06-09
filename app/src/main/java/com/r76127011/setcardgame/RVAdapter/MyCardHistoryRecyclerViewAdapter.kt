@@ -1,10 +1,8 @@
-package com.r76127011.setcardgame
+package com.r76127011.setcardgame.RVAdapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 
 import com.r76127011.setcardgame.placeholder.PlaceholderContent.PlaceholderItem
 import com.r76127011.setcardgame.databinding.FragmentItemBinding

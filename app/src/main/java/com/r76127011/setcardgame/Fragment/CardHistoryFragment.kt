@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.r76127011.setcardgame.MyCardHistoryRecyclerViewAdapter
+import com.r76127011.setcardgame.RVAdapter.MyCardHistoryRecyclerViewAdapter
 import com.r76127011.setcardgame.R
 import com.r76127011.setcardgame.placeholder.PlaceholderContent
 

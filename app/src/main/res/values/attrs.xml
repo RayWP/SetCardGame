@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PlayingCard">
-        <attr name="number" format="integer" />
-        <attr name="type" format="string"/>
+        <attr name="number" format="integer"/>
+        <attr name="shape" format="string"/>
         <attr name="shading" format="string"/>
+        <attr name="colorLine" format="string"/>
     </declare-styleable>
 </resources>
