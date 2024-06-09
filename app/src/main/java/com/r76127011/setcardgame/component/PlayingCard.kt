@@ -1,6 +1,7 @@
 package com.r76127011.setcardgame.component
 
 import android.content.Context
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -71,13 +72,22 @@ class PlayingCard : View {
     )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+
         // Get the parent's width
         val parentWidth = MeasureSpec.getSize(widthMeasureSpec)
         val parentHeight = MeasureSpec.getSize(heightMeasureSpec)
 
-        // Calculate the desired width (30% of the parent's width)
-        val desiredWidth = (parentWidth * 0.3).toInt()
-        val desiredHeight = (parentHeight * 0.3).toInt()
+
+        var desiredWidth = (parentWidth * 1).toInt()
+        var desiredHeight = (parentHeight * 0.3).toInt()
+
+        if(context.resources.configuration.orientation == ORIENTATION_LANDSCAPE){
+            desiredWidth = (parentWidth * 1).toInt()
+            desiredHeight = (parentHeight * 1).toInt()
+        } else {
+            desiredWidth = (parentWidth * 1).toInt()
+            desiredHeight = (parentHeight * 0.3).toInt()
+        }
 
         // Use the desired width with the original height spec
         val widthSpec = MeasureSpec.makeMeasureSpec(desiredWidth, MeasureSpec.EXACTLY)
@@ -85,9 +95,6 @@ class PlayingCard : View {
 
         // Call the super method with the new width spec
         super.onMeasure(widthSpec, heightSpec)
-
-        // Set the measured dimensions
-        setMeasuredDimension(desiredWidth, desiredHeight)
     }
 
     override fun onDraw(canvas: Canvas) {
