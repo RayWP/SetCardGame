@@ -2,4 +2,8 @@
     <string name="app_name">SetCardGame-R76127011</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="score_label">Score: </string>
+    <string name="card_left_label">Cards left: </string>
+    <string name="more_cards">More Cards</string>
+    <string name="submit">Submit</string>
 </resources>

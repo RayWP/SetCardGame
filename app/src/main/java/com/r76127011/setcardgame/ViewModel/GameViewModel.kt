@@ -20,11 +20,21 @@ class GameViewModel : ViewModel() {
         dealCards()
     }
 
+    fun addMoreCards() {
+        val newOnscreenDeck = onscreenDeck.value!!.toMutableList()
+        for (i in 0 until 3) {
+            newOnscreenDeck.add(fullDeck.value!![i])
+        }
+        fullDeck.value = fullDeck.value!!.subList(3, fullDeck.value!!.size)
+        onscreenDeck.value = newOnscreenDeck
+    }
+
     fun dealCards() {
         val newOnscreenDeck = mutableListOf<SetCard>()
         for (i in 0 until 12) {
             newOnscreenDeck.add(fullDeck.value!![i])
         }
+        fullDeck.value = fullDeck.value!!.subList(12, fullDeck.value!!.size)
         onscreenDeck.value = newOnscreenDeck
     }
 

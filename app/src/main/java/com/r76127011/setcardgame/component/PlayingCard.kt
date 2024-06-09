@@ -42,13 +42,13 @@ class PlayingCard : View {
 
     var color: String = ""
         set(value) {
-            if (value in listOf("red", "green", "black")) {
+            if (value in listOf("red", "green", "blue")) {
                 if (value == "red") {
                     internalColor = Color.RED
                 } else if (value == "green") {
                     internalColor = Color.GREEN
-                } else {
-                    internalColor = Color.BLACK
+                } else if (value == "blue"){
+                    internalColor = Color.BLUE
                 }
                 field = value
                 invalidate()

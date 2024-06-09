@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,15 +24,34 @@ class GamePlayFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGamePlayBinding.inflate(inflater, container, false)
+        initRecyclerView()
+
+        val cardLeftText: TextView = binding.cardsLeft!!
+        cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
+
+        val moreCardButton: Button = binding.moreCardButton!!
+        moreCardButton.setOnClickListener {
+            if(viewModel.fullDeck.value!!.size == 0) {
+                Toast.makeText(context, "No more cards to draw", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.addMoreCards()
+                gamePlayAdapter.values = viewModel.onscreenDeck.value!!
+                cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
+            }
+        }
+        return binding.root
+    }
+
+    private fun initRecyclerView() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
         //give space between item
         binding.recyclerView.addItemDecoration(
             GridSpacingItemDecoration(3, 10, true)
         )
-        binding.recyclerView.adapter = GamePlayRecyclerViewAdapter(viewModel.onscreenDeck.value!!)
-        return binding.root
+        gamePlayAdapter = GamePlayRecyclerViewAdapter(viewModel.onscreenDeck.value!!)
+        binding.recyclerView.adapter = gamePlayAdapter
     }
 
 }
