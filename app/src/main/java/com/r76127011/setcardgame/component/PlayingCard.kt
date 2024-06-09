@@ -14,6 +14,8 @@ import com.r76127011.setcardgame.R
 
 class PlayingCard : View {
 
+
+
     var number: Int = 0
         set(value) {
             if (value in 1..10) {
@@ -55,7 +57,6 @@ class PlayingCard : View {
 
     private var internalColor: Int = Color.CYAN
 
-    constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PlayingCard)
         number = typedArray.getInt(R.styleable.PlayingCard_number, 1)
@@ -64,12 +65,6 @@ class PlayingCard : View {
         color = typedArray.getString(R.styleable.PlayingCard_colorLine) ?: "red"
         typedArray.recycle()
     }
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 
@@ -81,7 +76,7 @@ class PlayingCard : View {
         var desiredWidth = (parentWidth * 1).toInt()
         var desiredHeight = (parentHeight * 0.3).toInt()
 
-        if(context.resources.configuration.orientation == ORIENTATION_LANDSCAPE){
+        if (context.resources.configuration.orientation == ORIENTATION_LANDSCAPE) {
             desiredWidth = (parentWidth * 1).toInt()
             desiredHeight = (parentHeight * 1).toInt()
         } else {
@@ -118,9 +113,11 @@ class PlayingCard : View {
         val strippingPath = Path()
         if (shading == "solid") {
             paint.style = Paint.Style.FILL_AND_STROKE
-        } else if (shading == "open") {
+        }
+        else if (shading == "open") {
             paint.style = Paint.Style.STROKE
-        } else {
+        }
+        else {
             paint.style = Paint.Style.STROKE
             for (i in 0 until width) {
                 if (i % 30 == 0) {
@@ -150,7 +147,8 @@ class PlayingCard : View {
             canvas.clipPath(path) // cut everything outside the path (diamond shape)
             canvas.drawPath(strippingPath, paint) // draw the stripping
 
-        } else if (shape == "diamond") {
+        }
+        else if (shape == "diamond") {
             // Calculate spacing for the diamonds
             val totalDiamondHeight: Float = (shapeHeight * number).toFloat()
             val totalSpacing = height - totalDiamondHeight
@@ -173,7 +171,8 @@ class PlayingCard : View {
             canvas.drawPath(path, paint) // draw all the shape path
             canvas.clipPath(path) // cut everything outside the path (diamond shape)
             canvas.drawPath(strippingPath, paint) // draw the stripping
-        } else if (shape == "squiggle") {
+        }
+        else if (shape == "squiggle") {
             val left: Float = ((width - shapeWidth) / 2).toFloat()
             val top: Float = ((height - shapeHeight * number) / 2).toFloat()
 
@@ -193,7 +192,7 @@ class PlayingCard : View {
             canvas.drawPath(path, paint)
         }
 
-    }
 
+    }
 
 }

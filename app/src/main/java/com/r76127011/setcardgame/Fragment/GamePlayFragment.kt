@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import com.r76127011.setcardgame.R
 import com.r76127011.setcardgame.RVAdapter.GamePlayRecyclerViewAdapter
 import com.r76127011.setcardgame.ViewModel.GameViewModel
+import com.r76127011.setcardgame.component.GridSpacingItemDecoration
 import com.r76127011.setcardgame.databinding.FragmentGamePlayBinding
 
 class GamePlayFragment : Fragment() {
@@ -26,8 +25,10 @@ class GamePlayFragment : Fragment() {
         binding = FragmentGamePlayBinding.inflate(inflater, container, false)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
         //give space between item
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
-        binding.recyclerView.adapter = GamePlayRecyclerViewAdapter(viewModel.deck.value!!)
+        binding.recyclerView.addItemDecoration(
+            GridSpacingItemDecoration(3, 10, true)
+        )
+        binding.recyclerView.adapter = GamePlayRecyclerViewAdapter(viewModel.onscreenDeck.value!!)
         return binding.root
     }
 

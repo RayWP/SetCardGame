@@ -24,6 +24,10 @@ class GamePlayRecyclerViewAdapter (private val values: List<SetCard>) : Recycler
         holder.binding.gameCard.shading = item.shading.value
         holder.binding.gameCard.shape = item.shape.value
 
+        holder.binding.root.setOnClickListener() {
+            holder.binding.gameCard.isSelected = !holder.binding.gameCard.isSelected
+        }
+
         holder.binding.executePendingBindings()
     }
 

@@ -11,10 +11,21 @@ import com.r76127011.setcardgame.Model.SetCardShape
 class GameViewModel : ViewModel() {
 
 
-    val deck = MutableLiveData<List<SetCard>>()
+    val fullDeck = MutableLiveData<List<SetCard>>()
+    val onscreenDeck = MutableLiveData<List<SetCard>>()
+    val selectedCards = MutableLiveData<MutableList<SetCard>>()
 
     init {
         generateDeck()
+        dealCards()
+    }
+
+    fun dealCards() {
+        val newOnscreenDeck = mutableListOf<SetCard>()
+        for (i in 0 until 12) {
+            newOnscreenDeck.add(fullDeck.value!![i])
+        }
+        onscreenDeck.value = newOnscreenDeck
     }
 
     private fun generateDeck() {
@@ -29,7 +40,7 @@ class GameViewModel : ViewModel() {
             }
         }
         newDeck.shuffle()
-        deck.value = newDeck
+        fullDeck.value = newDeck
     }
 
 }
