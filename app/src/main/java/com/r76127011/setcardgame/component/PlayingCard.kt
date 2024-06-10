@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
+import android.graphics.PointF
 import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
@@ -174,22 +175,31 @@ class PlayingCard : View {
             canvas.clipPath(path) // cut everything outside the path (diamond shape)
             canvas.drawPath(strippingPath, paint) // draw the stripping
         } else if (shape == "squiggle") {
-            val left: Float = ((width - shapeWidth) / 2).toFloat()
-            val top: Float = ((height - shapeHeight * number) / 2).toFloat()
-
-            // draw squiggle for set card game
+            // WORM
             val path = Path()
-            path.moveTo(100f, 100f); // Starting point
+            val center = PointF((width / 2).toFloat(), height / 2 + 10f)
+            path.moveTo((center.x - shapeWidth / 2).toFloat(),
+                (center.y + shapeHeight / 2).toFloat()
+            )
 
-            // Add quadratic Bezier curve
-            path.quadTo(150f, 50f, 200f, 100f);
+            val cp1 = PointF((center.x - shapeWidth / 4).toFloat(),
+                (center.y - shapeHeight * 1.5f).toFloat()
+            )
+            val cp2 = PointF((center.x + shapeWidth / 4).toFloat(), center.y)
+            val dst = PointF((center.x + shapeWidth / 2).toFloat(),
+                (center.y - shapeHeight / 2).toFloat()
+            )
+            path.cubicTo(cp1.x, cp1.y, cp2.x, cp2.y, dst.x, dst.y)
 
-            // Move to a new starting point
-            path.moveTo(100f, 200f);
+            cp1.x = (center.x + shapeWidth / 2).toFloat()
+            cp1.y = (center.y + shapeHeight * 2).toFloat()
+            cp2.x = (center.x - shapeWidth / 2).toFloat()
+            cp2.y = center.y
 
-            // Add cubic Bezier curve
-            path.cubicTo(150f, 150f, 250f, 250f, 300f, 200f);
+            dst.x = (center.x - shapeWidth / 2).toFloat()
+            dst.y = (center.y + shapeHeight / 2).toFloat()
 
+            path.cubicTo(cp1.x, cp1.y, cp2.x, cp2.y, dst.x, dst.y)
             canvas.drawPath(path, paint)
         }
 
