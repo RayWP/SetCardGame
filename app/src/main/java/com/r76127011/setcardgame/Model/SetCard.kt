@@ -11,7 +11,7 @@ enum class SetCardNumber (val value: Int) {
 enum class SetCardColor (val value: String) {
     RED ("red"),
     GREEN ("green"),
-    PURPLE ("purple")
+    BLUE ("blue")
 }
 
 enum class SetCardShape (val value: String) {

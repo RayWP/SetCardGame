@@ -7,7 +7,7 @@
         android:id="@+id/game_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/border"
+        android:background="@drawable/card_border_state"
         custom:colorLine="green"
         custom:number="2"
         custom:shading="stripped"
