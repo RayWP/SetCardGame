@@ -3,10 +3,9 @@ package com.r76127011.setcardgame.RVAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.recyclerview.widget.RecyclerView
-import com.r76127011.setcardgame.Model.SetCard
+import com.r76127011.setcardgame.model.SetCard
 import com.r76127011.setcardgame.R
 import com.r76127011.setcardgame.databinding.FragmentItemBinding
 
@@ -15,6 +14,10 @@ class GamePlayRecyclerViewAdapter () : RecyclerView.Adapter<GamePlayRecyclerView
     constructor(values: List<SetCard>) : this() {
         this.values = values
     }
+
+    private var numOfSelectedCard = 0
+
+    val selectedCards: MutableList<SetCard> = mutableListOf()
 
     var values: List<SetCard> = listOf()
         set(value) {
@@ -30,15 +33,22 @@ class GamePlayRecyclerViewAdapter () : RecyclerView.Adapter<GamePlayRecyclerView
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.binding.gameCard.number = item.number.value
-        holder.binding.gameCard.color = item.color.value
-        holder.binding.gameCard.shading = item.shading.value
-        holder.binding.gameCard.shape = item.shape.value
+        holder.binding.cardModel = item
 
-        val toastText = "Selected: ${item.number.value} ${item.color.value} ${item.shading.value} ${item.shape.value}"
         holder.binding.root.setOnClickListener() {
-            holder.binding.gameCard.isSelected = !holder.binding.gameCard.isSelected
-            Toast.makeText(holder.binding.root.context, toastText, Toast.LENGTH_SHORT).show()
+            if (!it.isSelected) {
+                if (numOfSelectedCard == 3) {
+                    Toast.makeText(holder.binding.root.context, "Can't select more than 3 cards", Toast.LENGTH_SHORT).show()
+                } else {
+                    numOfSelectedCard++
+                    it.isSelected = !it.isSelected
+                    selectedCards.add(item)
+                }
+            } else {
+                numOfSelectedCard--
+                it.isSelected = !it.isSelected
+                selectedCards.remove(item)
+            }
         }
 
         holder.binding.executePendingBindings()

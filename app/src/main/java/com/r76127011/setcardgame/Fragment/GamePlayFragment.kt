@@ -28,10 +28,10 @@ class GamePlayFragment : Fragment() {
         binding = FragmentGamePlayBinding.inflate(inflater, container, false)
         initRecyclerView()
 
-        val cardLeftText: TextView = binding.cardsLeft!!
+        val cardLeftText: TextView = binding.cardsLeft
         cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
 
-        val moreCardButton: Button = binding.moreCardButton!!
+        val moreCardButton: Button = binding.moreCardButton
         moreCardButton.setOnClickListener {
             if(viewModel.fullDeck.value!!.size == 0) {
                 Toast.makeText(context, "No more cards to draw", Toast.LENGTH_SHORT).show()
@@ -41,6 +41,26 @@ class GamePlayFragment : Fragment() {
                 cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
             }
         }
+
+        val submitCardButton: Button = binding.submitButton
+        submitCardButton.setOnClickListener {
+            val selectedCardsList = gamePlayAdapter.selectedCards
+            if (selectedCardsList.size != 3) {
+                Toast.makeText(context, "Please select 3 cards", Toast.LENGTH_SHORT).show()
+            } else {
+                if (viewModel.checkSet(selectedCardsList)) {
+                    Toast.makeText(context, "Correct! You found a set", Toast.LENGTH_SHORT).show()
+                    for (card in selectedCardsList) {
+                        viewModel.onscreenDeck.value = viewModel.onscreenDeck.value!!.filter { it != card }
+                    }
+                    gamePlayAdapter.values = viewModel.onscreenDeck.value!!
+                    cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
+                } else {
+                    Toast.makeText(context, "Incorrect! Not a set", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         return binding.root
     }
 

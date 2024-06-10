@@ -2,14 +2,19 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="cardModel"
+            type="com.r76127011.setcardgame.model.SetCard" />
+    </data>
 
     <com.r76127011.setcardgame.component.PlayingCard
         android:id="@+id/game_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/card_border_state"
-        custom:colorLine="green"
-        custom:number="2"
-        custom:shading="stripped"
-        custom:shape="squiggle" />
+        custom:number="@{cardModel.number.value}"
+        custom:colorLine="@{cardModel.color.value}"
+        custom:shading="@{cardModel.shading.value}"
+        custom:shape="@{cardModel.shape.value}" />
 </layout>

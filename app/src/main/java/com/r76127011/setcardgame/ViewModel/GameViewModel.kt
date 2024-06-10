@@ -2,11 +2,11 @@ package com.r76127011.setcardgame.ViewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.r76127011.setcardgame.Model.SetCard
-import com.r76127011.setcardgame.Model.SetCardColor
-import com.r76127011.setcardgame.Model.SetCardNumber
-import com.r76127011.setcardgame.Model.SetCardShading
-import com.r76127011.setcardgame.Model.SetCardShape
+import com.r76127011.setcardgame.model.SetCard
+import com.r76127011.setcardgame.model.SetCardColor
+import com.r76127011.setcardgame.model.SetCardNumber
+import com.r76127011.setcardgame.model.SetCardShading
+import com.r76127011.setcardgame.model.SetCardShape
 
 class GameViewModel : ViewModel() {
 
@@ -51,6 +51,10 @@ class GameViewModel : ViewModel() {
         }
         newDeck.shuffle()
         fullDeck.value = newDeck
+    }
+
+    fun checkSet(selectedCardsList: MutableList<SetCard>): Boolean {
+        return true
     }
 
 }

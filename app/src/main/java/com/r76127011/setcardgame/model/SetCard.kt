@@ -1,4 +1,4 @@
-package com.r76127011.setcardgame.Model
+package com.r76127011.setcardgame.model
 
 data class SetCard(val number: SetCardNumber, val color: SetCardColor, val shape: SetCardShape, val shading: SetCardShading)
 
