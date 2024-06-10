@@ -11,5 +11,5 @@
         custom:colorLine="green"
         custom:number="2"
         custom:shading="stripped"
-        custom:shape="diamond" />
+        custom:shape="squiggle" />
 </layout>

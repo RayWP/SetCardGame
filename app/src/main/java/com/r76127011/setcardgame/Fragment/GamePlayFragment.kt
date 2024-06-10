@@ -48,7 +48,7 @@ class GamePlayFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)
         //give space between item
         binding.recyclerView.addItemDecoration(
-            GridSpacingItemDecoration(3, 10, true)
+            GridSpacingItemDecoration(3, 20, true)
         )
         gamePlayAdapter = GamePlayRecyclerViewAdapter(viewModel.onscreenDeck.value!!)
         binding.recyclerView.adapter = gamePlayAdapter

@@ -175,32 +175,47 @@ class PlayingCard : View {
             canvas.clipPath(path) // cut everything outside the path (diamond shape)
             canvas.drawPath(strippingPath, paint) // draw the stripping
         } else if (shape == "squiggle") {
+            val totalDiamondHeight: Float = (shapeHeight * number).toFloat()
+            val totalSpacing = height - totalDiamondHeight
+            val spacing: Float = totalSpacing / (number + 1)
+
             // WORM
             val path = Path()
-            val center = PointF((width / 2).toFloat(), height / 2 + 10f)
-            path.moveTo((center.x - shapeWidth / 2).toFloat(),
-                (center.y + shapeHeight / 2).toFloat()
-            )
+            for (i in 0 until number) {
+                val centerX = (width / 2).toFloat()
+                val centerY: Float =
+                    (spacing * (i + 1) + shapeHeight * i + shapeHeight / 2).toFloat()
 
-            val cp1 = PointF((center.x - shapeWidth / 4).toFloat(),
-                (center.y - shapeHeight * 1.5f).toFloat()
-            )
-            val cp2 = PointF((center.x + shapeWidth / 4).toFloat(), center.y)
-            val dst = PointF((center.x + shapeWidth / 2).toFloat(),
-                (center.y - shapeHeight / 2).toFloat()
-            )
-            path.cubicTo(cp1.x, cp1.y, cp2.x, cp2.y, dst.x, dst.y)
+                val center = PointF(centerX, centerY)
+                path.moveTo((center.x - shapeWidth / 2).toFloat(),
+                    (center.y + shapeHeight / 2).toFloat()
+                )
+                val cp1 = PointF((center.x - shapeWidth / 4).toFloat(),
+                    (center.y - shapeHeight * 1.5f).toFloat()
+                )
+                val cp2 = PointF((center.x + shapeWidth / 4).toFloat(), center.y)
+                val dst = PointF((center.x + shapeWidth / 2).toFloat(),
+                    (center.y - shapeHeight / 2).toFloat()
+                )
+                path.cubicTo(cp1.x, cp1.y, cp2.x, cp2.y, dst.x, dst.y)
 
-            cp1.x = (center.x + shapeWidth / 2).toFloat()
-            cp1.y = (center.y + shapeHeight * 2).toFloat()
-            cp2.x = (center.x - shapeWidth / 2).toFloat()
-            cp2.y = center.y
+                cp1.x = (center.x + shapeWidth / 2).toFloat()
+                cp1.y = (center.y + shapeHeight * 2).toFloat()
+                cp2.x = (center.x - shapeWidth / 2).toFloat()
+                cp2.y = center.y
 
-            dst.x = (center.x - shapeWidth / 2).toFloat()
-            dst.y = (center.y + shapeHeight / 2).toFloat()
+                dst.x = (center.x - shapeWidth / 2).toFloat()
+                dst.y = (center.y + shapeHeight / 2).toFloat()
 
-            path.cubicTo(cp1.x, cp1.y, cp2.x, cp2.y, dst.x, dst.y)
+                path.cubicTo(cp1.x, cp1.y, cp2.x, cp2.y, dst.x, dst.y)
+            }
+
             canvas.drawPath(path, paint)
+            canvas.clipPath(path) // cut everything outside the path (diamond shape)
+            canvas.drawPath(strippingPath, paint) // draw the stripping
+
+
+
         }
 
     }
