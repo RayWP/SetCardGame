@@ -11,12 +11,12 @@ import com.r76127011.setcardgame.model.SetCard
 class MyCardHistoryRecyclerViewAdapter(
 ) : RecyclerView.Adapter<MyCardHistoryRecyclerViewAdapter.ViewHolder>() {
 
-    constructor(values: List<SetCard>) : this(
+    constructor(values: List<List<SetCard>>) : this(
     ) {
         this.values = values
     }
 
-    var values: List<SetCard> = listOf()
+    var values: List<List<SetCard>> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -35,11 +35,14 @@ class MyCardHistoryRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
+        holder.binding.cardModel1 = item[0]
+        holder.binding.cardModel2 = item[1]
+        holder.binding.cardModel3 = item[2]
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: CardHistoryItemBinding) :
+    inner class ViewHolder(val binding: CardHistoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) { }
 
 }
