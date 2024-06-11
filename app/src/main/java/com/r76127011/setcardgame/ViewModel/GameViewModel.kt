@@ -13,7 +13,7 @@ class GameViewModel : ViewModel() {
 
     val fullDeck = MutableLiveData<List<SetCard>>()
     val onscreenDeck = MutableLiveData<List<SetCard>>()
-    val selectedCards = MutableLiveData<MutableList<SetCard>>()
+    val cardHistory = MutableLiveData<List<List<SetCard>>>()
     val score = MutableLiveData<Int>(0)
 
     init {
@@ -28,6 +28,12 @@ class GameViewModel : ViewModel() {
         }
         fullDeck.value = fullDeck.value!!.subList(3, fullDeck.value!!.size)
         onscreenDeck.value = newOnscreenDeck
+    }
+
+    fun addCardsToHistory(selectedCardsList: MutableList<SetCard>) {
+        val newCardHistory = cardHistory.value!!.toMutableList()
+        newCardHistory.add(selectedCardsList)
+        cardHistory.value = newCardHistory
     }
 
     fun dealCards() {

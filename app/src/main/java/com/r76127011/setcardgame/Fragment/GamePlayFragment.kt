@@ -54,6 +54,8 @@ class GamePlayFragment : Fragment() {
                         viewModel.onscreenDeck.value = viewModel.onscreenDeck.value!!.filter { it != card }
                     }
 
+                    viewModel.addCardsToHistory(selectedCardsList)
+
                     gamePlayAdapter.values = viewModel.onscreenDeck.value!!.toMutableList()
 
                     // update cards left

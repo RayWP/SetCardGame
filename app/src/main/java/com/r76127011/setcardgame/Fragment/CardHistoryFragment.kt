@@ -23,14 +23,16 @@ class CardHistoryFragment : Fragment() {
 
     private lateinit var cardHistoryAdapter: MyCardHistoryRecyclerViewAdapter
     private lateinit var binding: FragmentCardHistoryBinding
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCardHistoryBinding.inflate(inflater, container, false)
-        val view = binding.root
-
-        return view
+        viewModel.cardHistory.observe(viewLifecycleOwner) {
+            cardHistoryAdapter.values = it
+        }
+        return binding.root
     }
 }
