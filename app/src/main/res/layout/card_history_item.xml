@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="cardModel1"
+            type="com.r76127011.setcardgame.model.SetCard" />
+        <variable
+            name="cardModel2"
+            type="com.r76127011.setcardgame.model.SetCard" />
+        <variable
+            name="cardModel3"
+            type="com.r76127011.setcardgame.model.SetCard" />
+    </data>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <com.r76127011.setcardgame.component.PlayingCard
+            android:id="@+id/card_1"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_border_state"
+            custom:number="@{cardModel1.number.value}"
+            custom:colorLine="@{cardModel1.color.value}"
+            custom:shading="@{cardModel1.shading.value}"
+            custom:shape="@{cardModel1.shape.value}" />
+
+        <com.r76127011.setcardgame.component.PlayingCard
+            android:id="@+id/card_2"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_border_state"
+            custom:number="@{cardModel2.number.value}"
+            custom:colorLine="@{cardModel2.color.value}"
+            custom:shading="@{cardModel2.shading.value}"
+            custom:shape="@{cardModel2.shape.value}" />
+
+        <com.r76127011.setcardgame.component.PlayingCard
+            android:id="@+id/card_3"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_border_state"
+            custom:number="@{cardModel3.number.value}"
+            custom:colorLine="@{cardModel3.color.value}"
+            custom:shading="@{cardModel3.shading.value}"
+            custom:shape="@{cardModel3.shape.value}" />
+    </LinearLayout>
+
+</layout>

@@ -1,47 +1,45 @@
 package com.r76127011.setcardgame.RVAdapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.r76127011.setcardgame.R
+import com.r76127011.setcardgame.databinding.CardHistoryItemBinding
+import com.r76127011.setcardgame.model.SetCard
 
-import com.r76127011.setcardgame.placeholder.PlaceholderContent.PlaceholderItem
-import com.r76127011.setcardgame.databinding.FragmentItemBinding
-
-/**
- * [RecyclerView.Adapter] that can display a [PlaceholderItem].
- * TODO: Replace the implementation with code for your data type.
- */
 class MyCardHistoryRecyclerViewAdapter(
-    private val values: List<PlaceholderItem>
 ) : RecyclerView.Adapter<MyCardHistoryRecyclerViewAdapter.ViewHolder>() {
 
+    constructor(values: List<SetCard>) : this(
+    ) {
+        this.values = values
+    }
+
+    var values: List<SetCard> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        return ViewHolder(
-            FragmentItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<CardHistoryItemBinding>(
+            inflater,
+            R.layout.card_history_item,
+            parent,
+            false
         )
-
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-//        holder.idView.text = item.id
-//        holder.contentView.text = item.content
     }
 
     override fun getItemCount(): Int = values.size
 
-    inner class ViewHolder(binding: FragmentItemBinding) : RecyclerView.ViewHolder(binding.root) {
-//        val idView: TextView = binding.itemNumber
-//        val contentView: TextView = binding.content
-//
-//        override fun toString(): String {
-//            return super.toString() + " '" + contentView.text + "'"
-//        }
-    }
+    inner class ViewHolder(binding: CardHistoryItemBinding) :
+        RecyclerView.ViewHolder(binding.root) { }
 
 }

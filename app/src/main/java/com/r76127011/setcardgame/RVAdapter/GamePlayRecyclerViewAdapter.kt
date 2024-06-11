@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.recyclerview.widget.RecyclerView
-import com.r76127011.setcardgame.model.SetCard
 import com.r76127011.setcardgame.R
 import com.r76127011.setcardgame.databinding.FragmentItemBinding
+import com.r76127011.setcardgame.model.SetCard
 
-class GamePlayRecyclerViewAdapter () : RecyclerView.Adapter<GamePlayRecyclerViewAdapter.ViewHolder>() {
+class GamePlayRecyclerViewAdapter() :
+    RecyclerView.Adapter<GamePlayRecyclerViewAdapter.ViewHolder>() {
 
     constructor(values: List<SetCard>) : this() {
         this.values = values
@@ -38,10 +39,14 @@ class GamePlayRecyclerViewAdapter () : RecyclerView.Adapter<GamePlayRecyclerView
         holder.binding.cardModel = item
         holder.binding.root.isSelected = false // reset the selected state of the card
 
-        holder.binding.root.setOnClickListener() {
+        holder.binding.root.setOnClickListener {
             if (!it.isSelected) {
                 if (numOfSelectedCard == 3) {
-                    Toast.makeText(holder.binding.root.context, "Can't select more than 3 cards", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        holder.binding.root.context,
+                        "Can't select more than 3 cards",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     numOfSelectedCard++
                     it.isSelected = !it.isSelected
@@ -60,6 +65,5 @@ class GamePlayRecyclerViewAdapter () : RecyclerView.Adapter<GamePlayRecyclerView
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(val binding: FragmentItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-    }
+        RecyclerView.ViewHolder(binding.root)
 }
