@@ -34,6 +34,7 @@ class GamePlayRecyclerViewAdapter () : RecyclerView.Adapter<GamePlayRecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.binding.cardModel = item
+        holder.binding.root.isSelected = false // reset the selected state of the card
 
         holder.binding.root.setOnClickListener() {
             if (!it.isSelected) {

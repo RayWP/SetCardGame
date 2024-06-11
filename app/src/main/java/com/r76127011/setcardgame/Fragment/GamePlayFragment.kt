@@ -28,6 +28,8 @@ class GamePlayFragment : Fragment() {
         binding = FragmentGamePlayBinding.inflate(inflater, container, false)
         initRecyclerView()
 
+        val scoreText: TextView = binding.score
+
         val cardLeftText: TextView = binding.cardsLeft
         cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
 
@@ -54,7 +56,13 @@ class GamePlayFragment : Fragment() {
                         viewModel.onscreenDeck.value = viewModel.onscreenDeck.value!!.filter { it != card }
                     }
                     gamePlayAdapter.values = viewModel.onscreenDeck.value!!
+
+                    // update cards left
                     cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
+
+                    // set score
+                    viewModel.score.value = viewModel.score.value?.plus(1)
+                    scoreText.text = viewModel.score.value.toString()
                 } else {
                     Toast.makeText(context, "Incorrect! Not a set", Toast.LENGTH_SHORT).show()
                 }

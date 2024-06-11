@@ -13,7 +13,16 @@ import android.view.View
 import com.r76127011.setcardgame.R
 
 
-class PlayingCard : View {
+class PlayingCard//        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PlayingCard)
+//        number = typedArray.getInt(R.styleable.PlayingCard_number, 1)
+//        shape = typedArray.getString(R.styleable.PlayingCard_shape) ?: "diamond"
+//        shading = typedArray.getString(R.styleable.PlayingCard_shading) ?: "solid"
+//        colorLine = typedArray.getString(R.styleable.PlayingCard_colorLine) ?: "red"
+//        typedArray.recycle()
+//    for a lesson: we dont need this because we use DataBinding in fragment_item.xml, thus making
+//    it access the getter setter properties directly
+//
+    (context: Context, attrs: AttributeSet) : View(context, attrs) {
 
     var number: Int = 0
         set(value) {
@@ -55,24 +64,6 @@ class PlayingCard : View {
         }
 
     private var internalColor: Int = Color.CYAN
-
-//    for a lesson: we dont need this because we use DataBinding in fragment_item.xml, thus making
-//    it access the getter setter properties directly
-//
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-//        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.PlayingCard)
-//        number = typedArray.getInt(R.styleable.PlayingCard_number, 1)
-//        shape = typedArray.getString(R.styleable.PlayingCard_shape) ?: "diamond"
-//        shading = typedArray.getString(R.styleable.PlayingCard_shading) ?: "solid"
-//        colorLine = typedArray.getString(R.styleable.PlayingCard_colorLine) ?: "red"
-//        typedArray.recycle()
-    }
-
-//    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
-//        context,
-//        attrs,
-//        defStyleAttr
-//    )
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 

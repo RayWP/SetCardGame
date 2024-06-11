@@ -14,6 +14,7 @@ class GameViewModel : ViewModel() {
     val fullDeck = MutableLiveData<List<SetCard>>()
     val onscreenDeck = MutableLiveData<List<SetCard>>()
     val selectedCards = MutableLiveData<MutableList<SetCard>>()
+    val score = MutableLiveData<Int>(0)
 
     init {
         generateDeck()
