@@ -21,6 +21,10 @@ class GamePlayFragment : Fragment() {
 
     private lateinit var gamePlayAdapter: GamePlayRecyclerViewAdapter
     private lateinit var binding: FragmentGamePlayBinding
+    private lateinit var cardLeftText: TextView
+    private lateinit var scoreText: TextView
+    private lateinit var moreCardButton: Button
+    private lateinit var submitCardButton: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,21 +34,15 @@ class GamePlayFragment : Fragment() {
 
         val scoreText: TextView = binding.score
 
-        val cardLeftText: TextView = binding.cardsLeft
+        cardLeftText = binding.cardsLeft
         cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
 
-        val moreCardButton: Button = binding.moreCardButton
+        moreCardButton = binding.moreCardButton
         moreCardButton.setOnClickListener {
-            if(viewModel.fullDeck.value!!.size == 0) {
-                Toast.makeText(context, "No more cards to draw", Toast.LENGTH_SHORT).show()
-            } else {
-                viewModel.addMoreCards()
-                gamePlayAdapter.values = viewModel.onscreenDeck.value!!
-                cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
-            }
+           drawMoreCard()
         }
 
-        val submitCardButton: Button = binding.submitButton
+        submitCardButton = binding.submitButton
         submitCardButton.setOnClickListener {
             val selectedCardsList = gamePlayAdapter.selectedCards
             if (selectedCardsList.size != 3) {
@@ -55,7 +53,8 @@ class GamePlayFragment : Fragment() {
                     for (card in selectedCardsList) {
                         viewModel.onscreenDeck.value = viewModel.onscreenDeck.value!!.filter { it != card }
                     }
-                    gamePlayAdapter.values = viewModel.onscreenDeck.value!!
+
+                    gamePlayAdapter.values = viewModel.onscreenDeck.value!!.toMutableList()
 
                     // update cards left
                     cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
@@ -63,14 +62,32 @@ class GamePlayFragment : Fragment() {
                     // set score
                     viewModel.score.value = viewModel.score.value?.plus(1)
                     scoreText.text = viewModel.score.value.toString()
+
+                    // draw more card
+                    drawMoreCard()
                 } else {
                     Toast.makeText(context, "Incorrect! Not a set", Toast.LENGTH_SHORT).show()
                 }
+            }
+
+            if (viewModel.fullDeck.value!!.size == 0 && viewModel.onscreenDeck.value!!.size == 0) {
+                Toast.makeText(context, "Game Over! Your score is ${viewModel.score.value}", Toast.LENGTH_SHORT).show()
             }
         }
 
         return binding.root
     }
+
+    private fun drawMoreCard() {
+        if(viewModel.fullDeck.value!!.size == 0) {
+            Toast.makeText(context, "No more cards to draw", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.addMoreCards()
+            gamePlayAdapter.values = viewModel.onscreenDeck.value!!
+            cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
+        }
+    }
+
 
     private fun initRecyclerView() {
         binding.recyclerView.layoutManager = GridLayoutManager(context, 3)

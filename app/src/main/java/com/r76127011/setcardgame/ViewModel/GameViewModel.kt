@@ -55,7 +55,22 @@ class GameViewModel : ViewModel() {
     }
 
     fun checkSet(selectedCardsList: MutableList<SetCard>): Boolean {
-        return true
+        if (selectedCardsList.size != 3) {
+            return false
+        }
+        val numberSet = mutableSetOf<SetCardNumber>()
+        val shapeSet = mutableSetOf<SetCardShape>()
+        val shadingSet = mutableSetOf<SetCardShading>()
+        val colorSet = mutableSetOf<SetCardColor>()
+
+        for (card in selectedCardsList) {
+            numberSet.add(card.number)
+            shapeSet.add(card.shape)
+            shadingSet.add(card.shading)
+            colorSet.add(card.color)
+        }
+
+        return numberSet.size != 2 && shapeSet.size != 2 && shadingSet.size != 2 && colorSet.size != 2
     }
 
 }

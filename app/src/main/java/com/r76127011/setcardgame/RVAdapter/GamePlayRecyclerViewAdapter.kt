@@ -22,6 +22,8 @@ class GamePlayRecyclerViewAdapter () : RecyclerView.Adapter<GamePlayRecyclerView
     var values: List<SetCard> = listOf()
         set(value) {
             field = value
+            numOfSelectedCard = 0
+            selectedCards.clear()
             notifyDataSetChanged()
         }
 
