@@ -49,12 +49,13 @@ class GamePlayFragment : Fragment() {
            drawMoreCard()
         }
 
-        // if its not tablet then get history button
-        historyButton = binding.cardHistoryButton!!
-        historyButton.setOnClickListener {
-            it.findNavController().navigate(R.id.action_gamePlayFragment_to_cardHistoryFragment)
+        if(!resources.getBoolean(R.bool.isTablet)) {
+            // if its not tablet then get history button
+            historyButton = binding.cardHistoryButton!!
+            historyButton.setOnClickListener {
+                it.findNavController().navigate(R.id.action_gamePlayFragment_to_cardHistoryFragment)
+            }
         }
-
 
         submitCardButton = binding.submitButton
         submitCardButton.setOnClickListener {
@@ -121,6 +122,7 @@ class GamePlayFragment : Fragment() {
         )
         gamePlayAdapter = GamePlayRecyclerViewAdapter(viewModel.onscreenDeck.value!!)
         binding.recyclerView.adapter = gamePlayAdapter
+        binding.recyclerView.setItemViewCacheSize(69)  // 69 is the number of cards in the deck
     }
 
 }

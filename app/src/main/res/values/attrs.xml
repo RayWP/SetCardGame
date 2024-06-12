@@ -6,4 +6,5 @@
         <attr name="shading" format="string"/>
         <attr name="colorLine" format="string"/>
     </declare-styleable>
+    <bool name="isTablet">false</bool>
 </resources>

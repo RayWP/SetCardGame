@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.r76127011.setcardgame.RVAdapter.GamePlayRecyclerViewAdapter
 import com.r76127011.setcardgame.RVAdapter.MyCardHistoryRecyclerViewAdapter
 import com.r76127011.setcardgame.ViewModel.GameViewModel
 import com.r76127011.setcardgame.component.GridSpacingItemDecoration
 import com.r76127011.setcardgame.databinding.FragmentCardHistoryBinding
-import com.r76127011.setcardgame.placeholder.PlaceholderContent
 
 /**
  * A fragment representing a list of Items.
