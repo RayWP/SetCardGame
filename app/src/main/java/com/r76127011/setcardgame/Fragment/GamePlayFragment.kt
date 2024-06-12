@@ -73,6 +73,8 @@ class GamePlayFragment : Fragment() {
 
                     gamePlayAdapter.values = viewModel.onscreenDeck.value!!.toMutableList()
 
+                    gamePlayAdapter.clearSelectedCards()
+
                     // update cards left
                     cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
 

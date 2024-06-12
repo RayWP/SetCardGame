@@ -73,6 +73,10 @@ class GamePlayRecyclerViewAdapter() :
 
     override fun getItemCount(): Int = values.size
 
+    fun clearSelectedCards() {
+        selectedCards.clear()
+        numOfSelectedCard = 0
+    }
     inner class ViewHolder(val binding: FragmentItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 }
