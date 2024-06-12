@@ -76,11 +76,11 @@ class PlayingCard//        val typedArray = context.obtainStyledAttributes(attrs
         var desiredHeight = (parentHeight * 0.3).toInt()
 
         if(context.resources.configuration.orientation == ORIENTATION_LANDSCAPE){
-            desiredWidth = (parentWidth * 1).toInt()
-            desiredHeight = (parentHeight * 1).toInt()
+            desiredWidth = (parentWidth * 0.8).toInt()
+            desiredHeight = (parentHeight * 0.3).toInt()
         } else {
             desiredWidth = (parentWidth * 1).toInt()
-            desiredHeight = (parentHeight * 0.28).toInt()
+            desiredHeight = (parentHeight * 0.25).toInt()
         }
 
         // Use the desired width with the original height spec
