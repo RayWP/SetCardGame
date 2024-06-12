@@ -17,5 +17,13 @@
         android:id="@+id/gamePlayFragment"
         android:name="com.r76127011.setcardgame.Fragment.GamePlayFragment"
         android:label="fragment_game_play"
-        tools:layout="@layout/fragment_game_play" />
+        tools:layout="@layout/fragment_game_play" >
+        <action
+            android:id="@+id/action_gamePlayFragment_to_cardHistoryFragment"
+            app:destination="@id/cardHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cardHistoryFragment"
+        android:name="com.r76127011.setcardgame.Fragment.CardHistoryFragment"
+        android:label="CardHistoryFragment" />
 </navigation>

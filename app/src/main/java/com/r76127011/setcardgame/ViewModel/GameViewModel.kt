@@ -13,12 +13,13 @@ class GameViewModel : ViewModel() {
 
     val fullDeck = MutableLiveData<List<SetCard>>()
     val onscreenDeck = MutableLiveData<List<SetCard>>()
-    val cardHistory = MutableLiveData<List<List<SetCard>>>()
+    val cardHistory = MutableLiveData<List<SetCard>>()
     val score = MutableLiveData<Int>(0)
 
     init {
         generateDeck()
         dealCards()
+        cardHistory.value = mutableListOf()
     }
 
     fun addMoreCards() {
@@ -30,10 +31,10 @@ class GameViewModel : ViewModel() {
         onscreenDeck.value = newOnscreenDeck
     }
 
-    fun addCardsToHistory(selectedCardsList: MutableList<SetCard>) {
-        val newCardHistory = cardHistory.value!!.toMutableList()
-        newCardHistory.add(selectedCardsList)
-        cardHistory.value = newCardHistory
+    fun addCardsToHistory(selectedCardsList: List<SetCard>) {
+        val newHistory = cardHistory.value!!.toMutableList()
+        newHistory.addAll(selectedCardsList)
+        cardHistory.value = newHistory
     }
 
     fun dealCards() {
@@ -51,7 +52,7 @@ class GameViewModel : ViewModel() {
             for (shape in SetCardShape.entries) {
                 for (shading in SetCardShading.entries) {
                     for (color in SetCardColor.entries)  {
-                        newDeck.add(SetCard(number, color, shape, shading))
+                        newDeck.add(SetCard(false, number, color, shape, shading))
                     }
                 }
             }
@@ -60,7 +61,9 @@ class GameViewModel : ViewModel() {
         fullDeck.value = newDeck
     }
 
-    fun checkSet(selectedCardsList: MutableList<SetCard>): Boolean {
+    fun checkSet(selectedCardsList: List<SetCard>): Boolean {
+
+        return true;
         if (selectedCardsList.size != 3) {
             return false
         }

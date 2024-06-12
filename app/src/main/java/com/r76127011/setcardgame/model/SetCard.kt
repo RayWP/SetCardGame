@@ -1,6 +1,6 @@
 package com.r76127011.setcardgame.model
 
-data class SetCard(val number: SetCardNumber, val color: SetCardColor, val shape: SetCardShape, val shading: SetCardShading)
+data class SetCard(var isSelected: Boolean, val number: SetCardNumber, val color: SetCardColor, val shape: SetCardShape, val shading: SetCardShading)
 
 enum class SetCardNumber (val value: Int) {
     ONE (1),

@@ -22,10 +22,19 @@ class GamePlayRecyclerViewAdapter() :
 
     var values: List<SetCard> = listOf()
         set(value) {
-            field = value
-            numOfSelectedCard = 0
-            selectedCards.clear()
-            notifyDataSetChanged()
+            if(value.isEmpty()) {
+                numOfSelectedCard = 0
+                field = value
+                notifyDataSetChanged()
+            } else if(value.size > field.size) {
+                // add more cards
+                field = value
+                notifyItemRangeInserted(field.size - 3, 3)
+            } else {
+                numOfSelectedCard = 0
+                field = value
+                notifyDataSetChanged()
+            }
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

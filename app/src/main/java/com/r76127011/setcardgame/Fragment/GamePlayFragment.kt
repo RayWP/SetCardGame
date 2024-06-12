@@ -9,7 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.r76127011.setcardgame.R
 import com.r76127011.setcardgame.RVAdapter.GamePlayRecyclerViewAdapter
 import com.r76127011.setcardgame.ViewModel.GameViewModel
 import com.r76127011.setcardgame.component.GridSpacingItemDecoration
@@ -25,6 +27,7 @@ class GamePlayFragment : Fragment() {
     private lateinit var scoreText: TextView
     private lateinit var moreCardButton: Button
     private lateinit var submitCardButton: Button
+    private lateinit var historyButton: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,8 +42,16 @@ class GamePlayFragment : Fragment() {
 
         moreCardButton = binding.moreCardButton
         moreCardButton.setOnClickListener {
+
            drawMoreCard()
         }
+
+        // if its not tablet then get history button
+        historyButton = binding.cardHistoryButton!!
+        historyButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_gamePlayFragment_to_cardHistoryFragment)
+        }
+
 
         submitCardButton = binding.submitButton
         submitCardButton.setOnClickListener {
