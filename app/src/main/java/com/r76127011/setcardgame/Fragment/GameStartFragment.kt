@@ -26,7 +26,7 @@ class GameStartFragment : Fragment() {
         binding = FragmentGameStartBinding.inflate(inflater, container, false)
         val startButton: Button = binding.startGameButton
         startButton.setOnClickListener{
-            it.findNavController().navigate(R.id.action_gameStartFragment_to_gamePlayFragment)
+            it.findNavController().navigate(R.id.action_gameStartFragment_to_gameContainerFragment)
         }
         return binding.root
     }

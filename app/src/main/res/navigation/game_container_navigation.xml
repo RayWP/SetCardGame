@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
-    app:startDestination="@id/gameStartFragment">
+    android:id="@+id/game_navigation"
+    app:startDestination="@id/gamePlayFragment">
 
-    <fragment
-        android:id="@+id/gameStartFragment"
-        android:name="com.r76127011.setcardgame.Fragment.GameStartFragment"
-        android:label="fragment_game_start">
-        <action
-            android:id="@+id/action_gameStartFragment_to_gamePlayFragment"
-            app:destination="@id/gamePlayFragment" />
-    </fragment>
     <fragment
         android:id="@+id/gamePlayFragment"
         android:name="com.r76127011.setcardgame.Fragment.GamePlayFragment"
-        android:label="fragment_game_play"
-        tools:layout="@layout/fragment_game_play" >
+        android:label="GamePlayFragment" >
         <action
             android:id="@+id/action_gamePlayFragment_to_cardHistoryFragment"
             app:destination="@id/cardHistoryFragment" />
