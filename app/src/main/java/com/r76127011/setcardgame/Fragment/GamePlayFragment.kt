@@ -28,6 +28,7 @@ class GamePlayFragment : Fragment() {
     private lateinit var moreCardButton: Button
     private lateinit var submitCardButton: Button
     private lateinit var historyButton: Button
+    private lateinit var resetButton: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +40,8 @@ class GamePlayFragment : Fragment() {
 
         cardLeftText = binding.cardsLeft
         cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
+
+        scoreText.text = viewModel.score.value.toString()
 
         moreCardButton = binding.moreCardButton
         moreCardButton.setOnClickListener {
@@ -86,6 +89,14 @@ class GamePlayFragment : Fragment() {
             if (viewModel.fullDeck.value!!.size == 0 && viewModel.onscreenDeck.value!!.size == 0) {
                 Toast.makeText(context, "Game Over! Your score is ${viewModel.score.value}", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        resetButton = binding.resetButton
+        resetButton.setOnClickListener {
+            viewModel.resetGame()
+            cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
+            scoreText.text = viewModel.score.value.toString()
+            gamePlayAdapter.values = viewModel.onscreenDeck.value!!
         }
 
         return binding.root
