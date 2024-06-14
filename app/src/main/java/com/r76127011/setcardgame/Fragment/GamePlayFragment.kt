@@ -90,6 +90,7 @@ class GamePlayFragment : Fragment() {
             }
 
             if (viewModel.fullDeck.value!!.size == 0 && viewModel.onscreenDeck.value!!.size == 0) {
+                submitCardButton.isEnabled = false
                 Toast.makeText(context, "Game Over! Your score is ${viewModel.score.value}", Toast.LENGTH_SHORT).show()
             }
         }
@@ -97,6 +98,7 @@ class GamePlayFragment : Fragment() {
         resetButton = binding.resetButton
         resetButton.setOnClickListener {
             viewModel.resetGame()
+            submitCardButton.isEnabled = true
             cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
             scoreText.text = viewModel.score.value.toString()
             gamePlayAdapter.values = viewModel.onscreenDeck.value!!

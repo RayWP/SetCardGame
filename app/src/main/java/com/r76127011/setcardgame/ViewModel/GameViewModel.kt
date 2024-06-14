@@ -89,7 +89,6 @@ class GameViewModel : ViewModel() {
 
     fun checkSet(selectedCardsList: List<SetCard>): Boolean {
 
-        return true;
         if (selectedCardsList.size != 3) {
             return false
         }
