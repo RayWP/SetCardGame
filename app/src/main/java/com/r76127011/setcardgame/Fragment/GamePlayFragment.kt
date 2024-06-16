@@ -36,7 +36,7 @@ class GamePlayFragment : Fragment() {
         binding = FragmentGamePlayBinding.inflate(inflater, container, false)
         initRecyclerView()
 
-        val scoreText: TextView = binding.score
+        scoreText = binding.score
 
         cardLeftText = binding.cardsLeft
         cardLeftText.text = viewModel.fullDeck.value!!.size.toString()
